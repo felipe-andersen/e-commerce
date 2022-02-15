@@ -1,6 +1,6 @@
-<p align="right">Portuguese(Brazil)</p>
+<p align="right">Portuguese (Brazil)</p>
 
-# Principais tecnologias utilizadas
+# Principais tecnologias utilizadas | Front end
 
 ## Principais linguagens 
 
@@ -8,7 +8,7 @@ Typescript, Graphql, SQL.
 
 ## Ferramanta de UI
 
-React. Desenvolvido e mantido pelo Facebook,framework para construção de interfaces gráficas com a facilidade do reuso decomponentes
+<b>React</b>. Desenvolvido e mantido pelo Facebook, framework para construção de interfaces gráficas com a facilidade do reuso de componentes.
 
 ## Gerenciamento de estado
 
@@ -16,6 +16,10 @@ React. Desenvolvido e mantido pelo Facebook,framework para construção de inter
 
 ## Ferramenta de cash
 
-## Gateway de pagamento 
+<b>Redux Saga</b>.
 
-Mercado Pago
+## Provedor de pagamento 
+
+<b>Mercado Pago</b>. Processos de pagamento gerenciado pelo maior provedor de pagamento da américa latina.
+
+

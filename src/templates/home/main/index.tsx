@@ -1,12 +1,14 @@
-
-
 import { useDispatch, useSelector } from "react-redux";
 import { ArrowIcon } from "../../../libs/icons/arrow";
 import { RootState } from "../../../state/components";
 import { MainActions } from "../../../state/components/main";
 import { mainAction } from "../../../state/components/main/actions";
-import { StyledMainComponent } from "./styles";
+import { Main } from "./styles";
 
+//https://usa.artmodakids/en-us
+//https://artmodakids.com/en
+//https://artmodakids.com.br
+//https://artmodakids.com.br/en
 
 const mainTranslationkit = {
     newslatterTitle: "Receba um monte de novidades da moda",
@@ -27,22 +29,38 @@ const hotListProducts: highlightedProduct[] = [
 interface highlightedProduct {
   productName: string,
   imgURL: string
-  
-}
+};
+
 const adapter:MainOrganismProps =  {
     newslatterTitle: mainTranslationkit.newslatterTitle,
     newslatterDescription: mainTranslationkit.newslatterDescription
-}
+};
 
 interface MainOrganismProps {
-    newslatterTitle: string;
-    newslatterDescription : string;
-}
+  newslatterTitle: string;
+  newslatterDescription : string;
+};
 
+
+
+
+interface MainPropsProtocol {
+  data?: MainDataProtocol
+  child?: MainChildProtocol
+};
+
+export interface MainDataProtocol {
+  newslatterTitle: string;
+  newslatterDescription : string;
+};
+
+interface MainChildProtocol {
+  newslatterTitle: string;
+  newslatterDescription : string;
+};
 
 export const MainOrganism = () => {
 
-  
 const productCategoriesList_ptBR:string[] = [
   "COMBOS",
   "MENINA",
@@ -157,9 +175,11 @@ const productCategoriesList:string[] = productCategoriesList_ptBR;
   }, 3000);
 */
 
+  
+
 
   return (
-    <StyledMainComponent>
+    <Main>
   
         <section className="section1" id="section1">
           <div className="productCategoryList" id="productCategoryList">
@@ -257,17 +277,39 @@ const productCategoriesList:string[] = productCategoriesList_ptBR;
               }
           </ul>
         </section>
+        <section>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem labore repellat in vero error sunt ipsa voluptatem optio deleniti, debitis, corrupti hic sed tenetur fuga itaque nulla. Debitis, quasi quis.
+          </p>
+        </section>
+
+
+
+        <span className="downloadApp-newslatter">
+          <section className="downloadApp">
+          
+          </section>
+
+
         <section className="newslatter" id="newslatter">
-          <h2>{ adapter.newslatterTitle }</h2>
+          <h6>{ "GANHE 40 R$ NA PRIMEIRA COMPRA" }</h6>
           <p /*contentEditable="false"*/>{ adapter.newslatterDescription }</p>
+          <span>{'Ocorreu um erro. Tente novamente.'}</span>
           <form>
-            <input title="" alt="" type="text" name="" placeholder="" aria-label="" className="" id=""/>
-            <input type="email" name="" placeholder="" aria-label="" className="" id=""/>
-            <input type="submit" name="" placeholder="" aria-label="" className="" id=""/>
-            <input type="submit" name="" placeholder="" aria-label="" className="" id=""/>
+            <input title="" alt="" type="email" name="" placeholder={"Digite um email válido"} aria-label="" className="huif-2354" id=""/>
+            <label className="label" htmlFor="hdfu-7319">
+              {"Menina"}
+               {/*<input type="submit" name="" placeholder="" aria-label="" className="" id=""/>*/}
+            </label>
+            <label className="label" htmlFor="hdfu-7319 guirl">
+              {"Menino"}
+             {/*<input type="submit" name="" placeholder="" aria-label="" className="" id=""/>*/}
+            </label>
           </form>
         </section>
-      </StyledMainComponent>
+
+        </span>
+      </Main>
 
   )
 }

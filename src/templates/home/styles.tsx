@@ -1,12 +1,7 @@
 import styled from "styled-components"
 
 
-export const HomeStyledComponent = styled.div` 
-  
-  header {
-    width: 100%;
-    margin :0;
-  }
+export const Div = styled.div` 
 
   .main-aside-footer {
     width: 100%;
@@ -26,11 +21,6 @@ export const HomeStyledComponent = styled.div`
 
   aside {
 
-
-
-
-
-  
   }
 `;
 

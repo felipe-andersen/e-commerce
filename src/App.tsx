@@ -9,7 +9,7 @@ import { LoginOrganism } from './templates/loginSignin/login';
 function App() {
   return (
     <Provider store={store}>
-      <LoginOrganism/>
+      <HomeTemplate/>
     </Provider>
   )
 };

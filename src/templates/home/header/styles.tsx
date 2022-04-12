@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 
-export const StyledHeaderOrganism = styled.div` 
+export const Header = styled.header` 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -331,8 +331,8 @@ export const StyledHeaderOrganism = styled.div`
     justify-content: space-between;
     align-items: center;
     //background-color: #ff00c8;
-    > ul {
 
+    > ul {
       display: flex;
       height: 100%;
       align-items: center;
@@ -344,7 +344,6 @@ export const StyledHeaderOrganism = styled.div`
         height: 30px;
         color: #777777;
         font-size: 12px;
-        
         background-color:white;
         list-style: none;
         display: flex;
@@ -410,8 +409,6 @@ export const StyledHeaderOrganism = styled.div`
         width: 100px;
         color: #777777;
         font-size: 12px;
-        
-        
         list-style: none;
         display: flex;
         justify-content: center;

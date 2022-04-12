@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { StyledHeaderOrganism } from "./styles";
+import { Header } from "./styles";
 import { RootState } from '../../../state/components';
 import { FullScreen } from '../../../libs/icons/fullScreen';
 import { CartIcon } from '../../../libs/icons/cart';
@@ -9,13 +9,13 @@ import { LoginIcon } from '../../../libs/icons/login';
 
 export interface IHeaderOrganism {
   name: string
-}
-
-const adapter:HeaderProps = {
-  makeYourLoginOrRegisterIDIOM: "Faça seu login ou cadastre-se",
 };
 
-interface HeaderProps{
+const adapter:HeaderProps = {
+  makeYourLoginOrRegisterIDIOM: "Entre ou cadastre-se",
+};
+
+interface HeaderProps {
   makeYourLoginOrRegisterIDIOM: string;
 };
 
@@ -136,7 +136,7 @@ const state = useSelector((state:RootState) => state);
 
   return (
     <>
-      <StyledHeaderOrganism>
+      <Header>
         <section className="hdr" id="hdr">
           <div className="" id="">
            
@@ -245,7 +245,7 @@ const state = useSelector((state:RootState) => state);
           </div>
         </section>
         
-      </StyledHeaderOrganism>
+      </Header>
     </>
   )
 } 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const  StyledMainComponent = styled.div`
+export const  Main = styled.main`
 
   .section1 {
     width: 100%;
@@ -228,12 +228,72 @@ export const  StyledMainComponent = styled.div`
       border-radius: 10px;
       margin: 0 0 0 6px;
     }
+  }
 
-    .newslatter {
-      width: 100%;
-      background-color: yellow;
+  .downloadApp-newslatter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .downloadApp {
+      width: 49.95%;
+      background-color: #d4d4d4;
       box-sizing: border-box;
       padding: 35px;
+      margin: 0 0 70px 0;
+    }
+
+    .newslatter {
+      width: 48%;
+      background-color: #ffe2d2;
+      box-sizing: border-box;
+      padding: 35px;
+      margin: 0 0 70px 0;
+
+      h6 {
+        font-size: 20px;
+      }
+
+      form {
+        display: flex;
+
+        .huif-2354 {
+          width: 250px;
+          height: 40px;
+          border: none;
+          border-radius: 3px;
+
+          outline-color: #9c009c;
+
+          ::placeholder {
+            color: black;
+          
+          }
+        }
+
+        label {
+          width: 80px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #fa0000;
+          border-bottom: 2px solid yellow;
+          margin: 0 0 0 10px;
+          color: white;
+          border-radius: 3px;
+        }
+
+        .guirl {
+          background-color: #a39230;
+          color: white;
+        }
+
+        .boy {
+          background-color: #a39230;
+          color: white;
+        }
+      }
     }
   }
 `;

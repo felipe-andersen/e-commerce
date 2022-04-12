@@ -1,4 +1,6 @@
-export const CartOrganismModal: React.FC = ():JSX.Element => {
+
+
+export const CartOrganismModal: React.FC = (): JSX.Element => {
   return (
     <>
       <section>
@@ -7,3 +9,4 @@ export const CartOrganismModal: React.FC = ():JSX.Element => {
     </>
   )
 }
+

@@ -1,7 +1,8 @@
 import styled from "styled-components"
 
 
-export const Header = styled.header` 
+export const Header = styled.header`
+    box-sizing:border-box; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,6 +10,7 @@ export const Header = styled.header`
     align-items: center;
     margin :0;
     position: relative;
+    padding: 0 10px 0 10px;
 
     button {
       border: none;
@@ -23,12 +25,38 @@ export const Header = styled.header`
     align-items: center;
 
     > div {
-        width: 1024px;
+        max-width: 1024px;
+        width: 100%;
         height: 70px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         //background-color: #7a9908;
+        
+        .logo-searchBtn {
+          display: flex;
+          align-items: center;
+
+          .logo {
+            margin: 0 10px 0 0;
+          }
+
+          .searchIcon {
+            margin: 0 10px 0 0;
+
+            svg {
+              fill: black;
+              transform: scale(90%);
+            }
+          }
+
+
+          .menuIcon {
+            transform : scale(78%);
+            margin: 0 10px 0 0;
+          }
+        }
+    
 
         form {
           width: 350px;
@@ -80,32 +108,24 @@ export const Header = styled.header`
               display: none;
             }
           }
-
+        }
         
-        }
-
-        .signup {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          svg {
-            margin: 0 8px 0 0;
-          }
-        }
-
-        .favorite-cart {
+        .favorite-cart-signIn-menu{
           display: flex;
 
           a, button {
             width: 40px;
             height: 40px;
-            background-color: #f8f8f8;
+
             border-radius: 566565px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 4px;
+
+            :focus {
+              background-color: #f8f8f8;
+            }
           }
 
           .addFavoritesBtn {
@@ -114,8 +134,15 @@ export const Header = styled.header`
             }
           }
 
-          svg {
-            
+          .signIn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+  
+            svg {
+              margin: 0 8px 0 0;
+              transform: scale(110%);
+            }
           }
         }
 
@@ -149,10 +176,23 @@ export const Header = styled.header`
             justify-content: space-between;
 
             .icon-sectionTitle {
+              width: 100%;
               display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              .iconContainer {
+              width: 35px;
+              height:  35px;
+              border-radius: 50000px;
               display: flex;
               justify-content: center;
               align-items: center;
+
+                svg {
+                  fill: red;
+                }
+              }
 
               .fullScreen {
               border: none;
@@ -217,15 +257,18 @@ export const Header = styled.header`
               max-height:  35px;
               display: flex;
 
-              :hover {
-                border-left: 3px solid black;
-              }
-
             .description {
               display: flex;
               //background-color: #91f8ff;
               width: 41%;
               justify-content: center;
+
+                img {
+                  width: 40px;
+                  height: 40px;
+                  overflow: hidden;
+                  margin: 0 5px 0 0;
+                }
 
                 > span {
                   overflow-y: hidden;
@@ -271,6 +314,27 @@ export const Header = styled.header`
               padding: 0 10px;
               color: #b6b6b6;
               margin: 3px 0 0 0;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              input {
+                border: 1px solid #c7c7c7;
+                background-color: transparent;
+                border-radius: 9px;
+
+                ::placeholder {
+                  font-size: 12px;
+                }
+              }
+
+              .view-remove-edit {
+                display: flex;
+                
+                button {
+                  color: blue;
+                }
+              }
             }
           }
 
@@ -298,6 +362,69 @@ export const Header = styled.header`
       }
     }
   }
+
+    .searchForm {
+      max-width: 1024px;
+      width: 100%;
+       height: 45px;
+      //display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //background-color: #7a9908;
+
+
+      form {
+          width: 350px;
+          height: 35px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 566565px;
+          //border: 2px solid grey;
+       
+          background-color: #f0ebe9;
+
+
+          .searchInput {
+            width: 150px;
+            height: 100%;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            color: #865b67;
+          }
+
+          .submitLabel {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content:  center;
+            align-items: center;
+            border-radius: 566565px;
+            //border: 2px solid grey;
+            background-color: #dfdfdf;
+
+            input {
+              display: none;
+            }
+          }
+
+          .imageLabel {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content:  center;
+            align-items: center;
+            border-radius: 566565px;
+            //border: 2px solid grey;
+            background-color: #dfdfdf;
+
+            input {
+              display: none;
+            }
+          }
+        }
+   }
   
   .container_section2 {
     width: 100%;
@@ -422,4 +549,25 @@ export const Header = styled.header`
     }
   }
 
+  @media (width: 500px) {
+
+    .hdr {
+      div {
+        form{
+          display: none;
+        }
+      }
+    }
+    
+
+    .searchForm {
+
+      display: flex;
+      margin: 8px 0 8px 0;
+
+      align-items: center;
+      justify-content: center;
+
+    }
+  }
 `;

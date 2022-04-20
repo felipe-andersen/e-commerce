@@ -1,6 +1,8 @@
 import { IndexType } from "typescript";
 import { CheckIcon } from "../../../libs/icons/check";
 import { InfoIcon } from "../../../libs/icons/info";
+import { SearchIcon } from "../../../libs/icons/searchIcon";
+import { SettingsIcon } from "../../../libs/icons/SettingsIcon";
 import { Footer } from "./styles";
 
 const KitTranslate = {
@@ -91,6 +93,10 @@ export const FooterOrganism = () => {
 
         </span>
         <a href=".settings" title="">{"Reportar mal funcionamento"}</a>
+        <span className="chat">
+          <SettingsIcon/>
+        </span>
+
       </span>
 
       </span>

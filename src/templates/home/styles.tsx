@@ -2,6 +2,9 @@ import styled from "styled-components"
 
 
 export const Div = styled.div` 
+  width: 100%;
+  max-width: 1800px;
+
 
   .main-aside-footer {
     width: 100%;

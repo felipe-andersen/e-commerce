@@ -72,6 +72,25 @@ export const  Main = styled.main`
     align-items: center;
     //background-color: #ff00c8;
 
+    .local {
+      height: 100%;
+      padding:0 16px;
+      border: none;
+      background-color: #dd00ad;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+
+      :hover {
+        background-color: #c20098;
+      }
+
+      svg {
+        transform: scale(30%)
+      }
+    }
+
     > ul {
       display: flex;
       height: 100%;
@@ -150,17 +169,125 @@ export const  Main = styled.main`
         }
       }
     }
-  }
+  } 
 
-  .banner {
+  .galery {
+    box-sizing: border-box;
+    max-width: 1850px;
     width: 100%;
-    min-height: 300px;
-    max-height:  400px;
-    height:  400px;
+    max-height: 400px;
+    height: 400px;
     overflow: hidden;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+      span {
+        box-sizing: border-box;
+        max-width: 1024px;
+        width: 90%;
+        height: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        padding: 0 16px;
+        position: absolute;
+        
+        .bigBtn {
+          width: 35px;
+          height: 35px;
+          border-radius: 556565px;
+          border: 1px solid rgb(196, 196, 196, 0.6);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .galleryGuide {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          align-self: flex-end;
+          position: relative;
+       
+          .slide {
+            width: 10px;
+            height: 10px;
+            background-color: #ff7c7c;
+            border: 2px solid red;
+            border-radius: 10px;
+            margin: 0 0 0 6px;
+          }
+        }
+      }
+
+    .items {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items:center;
+
+      overflow-x: auto;
+
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+  
+        ::-webkit-scrollbar {
+
+        }
+  
+    ::-webkit-scrollbar-track {
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+
+    }  
+
+      .item {
+        box-sizing: border-box;
+        flex: none;
+        scroll-snap-align: start;
+        width:100%;
+        height: 98%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border: none;
+        }
+      }
+    }
+
+      /*
+        @Keyframes TransitionGaleryImg {
+          0%{ opacity:0.8; }
+          100%{ opacity:1; }
+        }
+
+        @-webkit-keyframes TransitionGaleryImg {
+          0%{ opacity:0.8; }
+          100%{ opacity:1; }
+        }
+
+        @keyframes TransitionGaleryImg {
+          0%{ opacity:0.8; }
+          100%{ opacity:1; }
+        }
+        */
+    }   
     
     ::-webkit-scrollbar {
       height: 5px;
@@ -180,53 +307,6 @@ export const  Main = styled.main`
 
     > img {
       width: 100%;
-    }
-  }
-  
-  .galleryGuide {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-
-    .previusBtn {
-      width: 20px;
-      height: 20px;
-      border-radius: 556565px;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-     
-        transform: rotate(180deg) scale(340%);
-
-      }
-    }
-
-    .nextBtn {
-      width: 20px;
-      height: 20px;
-      border-radius: 556565px;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-        transform: scale(340%);
-      }
-    }
-    
-    .slide {
-      width: 10px;
-      height: 10px;
-      background-color: #ff7c7c;
-       border: 2px solid red;
-      border-radius: 10px;
-      margin: 0 0 0 6px;
     }
   }
 
@@ -294,6 +374,12 @@ export const  Main = styled.main`
           color: white;
         }
       }
+    }
+  }
+
+  @media (width: 500px) {
+    .head {
+      display: none;
     }
   }
 `;

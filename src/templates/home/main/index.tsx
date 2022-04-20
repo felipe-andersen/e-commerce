@@ -1,8 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
+import { useState } from "react";
+import { ChildreenProtocol } from "..";
+import { HighlightedProductProtocol } from "../../../businessData/hotListProducts/ptBR";
+import { BackBtn } from "../../../libs/components/backBtn";
 import { ArrowIcon } from "../../../libs/icons/arrow";
-import { RootState } from "../../../state/components";
-import { MainActions } from "../../../state/components/main";
-import { mainAction } from "../../../state/components/main/actions";
+import { BaloonIcon } from "../../../libs/icons/baloon";
+import { HeaderComponentProtocol } from "../header";
 import { Main } from "./styles";
 
 //https://usa.artmodakids/en-us
@@ -10,80 +13,44 @@ import { Main } from "./styles";
 //https://artmodakids.com.br
 //https://artmodakids.com.br/en
 
-const mainTranslationkit = {
-    newslatterTitle: "Receba um monte de novidades da moda",
-    newslatterDescription: ""
-}
+export type LangType = 'en' | 'ptBR'
 
-const hotListProducts: highlightedProduct[] = [
-    {  
-      productName: "",
-      imgURL: ""
-    },
-    {  
-      productName: "",
-      imgURL: ""
-    },
-];
-
-interface highlightedProduct {
-  productName: string,
-  imgURL: string
-};
-
-const adapter:MainOrganismProps =  {
-    newslatterTitle: mainTranslationkit.newslatterTitle,
-    newslatterDescription: mainTranslationkit.newslatterDescription
-};
-
-interface MainOrganismProps {
-  newslatterTitle: string;
-  newslatterDescription : string;
-};
-
-
-
-
-interface MainPropsProtocol {
-  data?: MainDataProtocol
-  child?: MainChildProtocol
+export interface MainComponentProtocol  {
+  lang?: LangType
+  content: MainDataProtocol;
+  setContent?: any;
+  childreen?: [
+    header: HeaderComponentProtocol
+  ]
 };
 
 export interface MainDataProtocol {
-  newslatterTitle: string;
-  newslatterDescription : string;
+  newslatterTitle?: string;
+  newsllaterResponse?: {
+    success: string;
+    error: string
+  };
+  newslatterDescription?: string;
+  productCategoriesList?: string[];
+  topSearchList?: string[];
+  hotListProducts?: HighlightedProductProtocol[];
+  input_error?: string;
+  galeryImg?: string[]
 };
 
-interface MainChildProtocol {
-  newslatterTitle: string;
-  newslatterDescription : string;
-};
+type MainChildreenType = JSX.Element[];
 
-export const MainOrganism = () => {
+const MainComponent = (props:MainComponentProtocol) => {
 
-const productCategoriesList_ptBR:string[] = [
-  "COMBOS",
-  "MENINA",
-  "MENINO",
-  "ADULTOS",
-  "ESCOLAR",
-  "OUTLET",
-];
+  const {galeryImg, productCategoriesList, topSearchList, hotListProducts, newslatterDescription} = props.content
 
-enum ProductCategoriesList_ptBR  {
-  COMBOS = 'COMBOS',
-  MENINA = 'MENINA',
-  MENINO = 'MENINO',
-  ADULTOS = 'ADULTOS',
-  ESCOLAR = 'ESCOLAR',
-  OUTLET = 'OUTLET',
-};
+  /*
+  let category: string;
 
-let category: string;
 
-function clickCounterByCategory() {
+  function clickCounterByCategory() {
 
-switch (category) {
+  switch (category) {
 
   case productCategoriesList_ptBR[0] :
     console.log('setCounter.');
@@ -113,96 +80,69 @@ switch (category) {
     console.log(`setCounter.`);
   }
 };
+*/
+  
+  let next ;
+  let previus;
+  let hotListProducts_title;
+  switch (props.lang) {
+    case 'ptBR':
+      previus = 'Voltar';
+      next = 'Próximo';
+      hotListProducts_title = 'Hotlist Product'
+      break
+    case 'en' : 
+      previus = "Previus"
+      next = 'Next'
+      hotListProducts_title = 'Mais quentes'
+      break
+    default :
+      previus = "Previus"
+      next = 'Next'
+      hotListProducts_title = 'Hotlist Product'
+  };
 
-const topSearchList_ptBR:string[] = [
-  "moleton",
-  "óculos de sol",
-  "roupa de frio",
-  "calça jeans",
-  "T-short",
-  "tênis lacoste",
-  "brandilli",
-  "moleton",
-  "óculos de sol",
-  "roupa de frio",
-  "calça jeans",
-  "T-short",
-  "tênis lacoste",
-  "brandilli",
-  "óculos de sol",
-  "roupa de frio",
-  "calça jeans",
-  "T-short",
-  "tênis lacoste",
-  "brandilli"
-];
+  const myTitle = props.childreen![0].content.myTitle;
 
-const topSearchList:string[] = topSearchList_ptBR;
+  let imgAmount = galeryImg!.length - 1;
 
-const productCategoriesList:string[] = productCategoriesList_ptBR;
+  const foo = useRef<string>();
 
-  const galeryImg = [
-    "https://institucional.lojasleader.com.br/wp-content/uploads/2019/09/banner-blog-home-3.png",
-    "https://institucional.lojasleader.com.br/wp-content/uploads/2019/09/banner-blog-home-3.png",
-    "https://institucional.lojasleader.com.br/wp-content/uploads/2019/09/banner-blog-home-3.png",
-    "https://institucional.lojasleader.com.br/wp-content/uploads/2019/09/banner-blog-home-3.png",
-  ];
+  const [index, setIndex] = useState(0);
 
-  let imgAmount = galeryImg.length;
+  type Key = 'next' | 'previus';
 
-  const state = useSelector((state:RootState) => state);
-
-  const setState = useDispatch();
-
-  function indexProvider() {
-    if (state.mainStateReducer.index < imgAmount) {
-      setState(mainAction(MainActions.SET_INDEX, { index: state.mainStateReducer.index + 1 }))
-      console.log(state.mainStateReducer.index)
-    } else if (state.mainStateReducer.index >= imgAmount) {
-      setState(mainAction(MainActions.SET_INDEX, { index: 0}))
-      console.log(state.mainStateReducer.index)
+  function indexProvider(key: Key) {
+    if (key === 'next') {
+      index < imgAmount ? setIndex(index + 1) : index >= imgAmount ? setIndex(0) : setIndex(index)
+    } else if (key === 'previus') {
+      index > 0 ? setIndex(index - 1) : index === 0 ? setIndex(galeryImg!.length - 1) : setIndex(index)
     }
   };
 
+  /** */
 
-/*
-  setTimeout(() => {
-    if (index > imgAmount) {
-      setIndex(index + 1)
-    } else {
-      setIndex(0)
-    }
-  }, 3000);
-*/
-
-  
-
+  const changeImg = indexProvider;
 
   return (
-    <Main>
-  
+    <Main aria-details="Contém galeria de imagens, produtos destacados" id="" /*itemID="" itemProp="" itemRef="" itemScope itemType="" is="" about="" accessKey=""  placeholder={"nfdm"} hidden={false} onLoad={()=>{}} onAuxClick={undefined} placeholder={"nfdm"} property={undefined} onReset={undefined} onResetCapture={undefined} role = {undefined} results={undefined} resource="" ref={undefined} spellCheck={undefined} security=" " slot=" " dir="" tabIndex={undefined} onTimeUpdate={undefined} suppressHydrationWarning={undefined} onWaiting={undefined} onMouseEnter={undefined} onEmptied={undefined} onLoadStart={undefined}*/>
+      <section className="head" >
         <section className="section1" id="section1">
           <div className="productCategoryList" id="productCategoryList">
-            <button title="" className="local" id="local"></button>
+            <button title="" className="local" id="local">
+              <BaloonIcon/>
+              {'Brazil'}
+            </button>
             <ul>
-              <li className="item" id="item" style={{borderBottom: "3px solid red"}}>
-                <a href="">{productCategoriesList[0]}</a>
-              </li>
-              <li className="item" id="item" style={{borderBottom: "3px solid yellow"}}>
-                <a href="">{productCategoriesList[1]}</a>
-              </li>
-              <li className="item" id="item" style={{borderBottom: "3px solid blue"}}>
-                <a href="">{productCategoriesList[2]}</a>
-              </li>
-              <li className="item" id="item" style={{borderBottom: "3px solid viollet"}}>
-                <a href="">{productCategoriesList[3]}</a>
-              </li>
-              <li className="item" id="item" style={{borderBottom: "3px solid green"}}>
-                <a href="">{productCategoriesList[4]}</a>
-              </li>
-              <li className="item" id="item" style={{borderBottom: "3px solid orange"}}>
-                <a href="">{productCategoriesList[5]}</a>
-              </li>
+                {
+                  productCategoriesList!.map(i => {
+                    return (
+                      <li className="item" id="item" style={{borderBottom: "3px solid red"}}>
+                        <a href="">{i}</a>
+                      </li>
+                    )
+                  })
+                }
             </ul>
           </div>
         </section>
@@ -210,8 +150,8 @@ const productCategoriesList:string[] = productCategoriesList_ptBR;
           <div className="topSearchList" id="topSearchList">
             <ul>
               { 
-                topSearchList.map( i => {  
-                  return(
+                topSearchList!.map( i => {  
+                  return (
                     <li>
                       <a href="">{i}</a>
                     </li>
@@ -221,23 +161,35 @@ const productCategoriesList:string[] = productCategoriesList_ptBR;
             </ul>
           </div>
         </section>
-    
-
+      </section>  
+        
+        <section className="galery" id="galery">
+          <span>
+              <button title={previus} className="bigBtn galeryBtn" id=""  onClick={() => {}}/>
+              <span className="galleryGuide" id="galleryGuide" onClick={undefined}>
+                <span className="slide" id="slide"/>
+              </span>
+              <button title={next} className="bigBtn galeryBtn" id="" onClick={() => {}}/>
+          </span>
+          <div className="items" id="items">
+          
   
-        <section className="banner" id="" aria-flowto="newslatter">
-          <img className="" id=""  src={galeryImg[0]}/>
+            {
+              galeryImg!.map(i => {
+                return (
+                  <div className="item" id="item">
+                    <img title="" alt="" className="" id="" src={i}/>
+                  </div>
+                )
+              })
+            }
+         
+            {/*<img title="" className="" id="" src={galeryImg![index]}/>*/}
+          </div>
         </section>
+
         <div className="galleryGuide" id="galleryGuide">
-          <button className="previusBtn" id="previusBtn">    
-            <ArrowIcon/>
-          </button>
-          <span className="slide" id="slide" style={{background: "white", width: "10px", height: '10px', /*transform: "scale(105%)"*/}}/>
-          <span className="slide" id="slide" style={{background: "white", width: "10px", height: '10px', /*transform: "scale(105%)"*/}}/>
-          <span className="slide" id="slide" style={{background: "red", width: "10px", height: '10px', transform: "scale(115%)"}}/>
-          <button className="nextBtn" id="nextBtn" onClick={() => indexProvider()}>
-            <ArrowIcon/>
-          </button>
-          {state.mainStateReducer.index}
+          <span className="slide" id="slide" onClick={() => {}}/>
         </div>
         <section className="" id="">
           <ul>
@@ -263,13 +215,14 @@ const productCategoriesList:string[] = productCategoriesList_ptBR;
             </li>
           </ul>
         </section >
-        <section className="" id="">
+        <section className="hotListProducts" id="" title={"hotListProducts_title"}>
+          <h6>{"hotListProducts_title"}</h6>
           <ul>
               {
-                hotListProducts.map( i => {
+                hotListProducts!.map( i => {
                   return (
                     <li>
-                      <img className="" id="" src={ i.imgURL }/>
+                      <img className="" id="" alt={''} src={ i.imgURI }/>
                       { i.productName }
                     </li>
                   )
@@ -277,24 +230,26 @@ const productCategoriesList:string[] = productCategoriesList_ptBR;
               }
           </ul>
         </section>
+        <section title={'responsability'}>
+          <h6>{'Responsabilidade'}</h6>
+          <ul>
+            <li>Selo de qualidade</li>
+            <li></li>
+            <li></li>
+          </ul>
+        </section>
         <section>
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem labore repellat in vero error sunt ipsa voluptatem optio deleniti, debitis, corrupti hic sed tenetur fuga itaque nulla. Debitis, quasi quis.
           </p>
         </section>
-
-
-
         <span className="downloadApp-newslatter">
           <section className="downloadApp">
-          
           </section>
-
-
         <section className="newslatter" id="newslatter">
           <h6>{ "GANHE 40 R$ NA PRIMEIRA COMPRA" }</h6>
-          <p /*contentEditable="false"*/>{ adapter.newslatterDescription }</p>
-          <span>{'Ocorreu um erro. Tente novamente.'}</span>
+          <p /*contentEditable="false"*/>{ newslatterDescription }</p>
+          <span>{'Ocorreu um erro. Tente novamente. | Sem conexão. Aguardando restabelecer...'}</span>
           <form>
             <input title="" alt="" type="email" name="" placeholder={"Digite um email válido"} aria-label="" className="huif-2354" id=""/>
             <label className="label" htmlFor="hdfu-7319">
@@ -307,18 +262,20 @@ const productCategoriesList:string[] = productCategoriesList_ptBR;
             </label>
           </form>
         </section>
-
         </span>
       </Main>
-
   )
-}
-/*
-function reqListener(){
- return ""
 };
 
-let oReq = new XMLHttpRequest(); 
-oReq.onload = reqListener;
+export default MainComponent
 
-oReq.open("get", "", false);*/
+/*
+Sobre
+Proposito
+Serviços
+portifolio
+Clientes
+Perguntas e Respostas
+contato
+
+*/

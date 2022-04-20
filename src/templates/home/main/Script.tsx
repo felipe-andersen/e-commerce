@@ -12,6 +12,10 @@ class Script {
     }
   };
 
+  private translate () {
+
+  };
+
   private query(): void {
 
   };
